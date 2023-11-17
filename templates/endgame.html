@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{{define "endgame"}}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/styles.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=Permanent+Marker&family=Solitreo&family=Splash&display=swap" rel="stylesheet">
+    <title>Hangman - Fin</title>
+</head>
+<body>
+<div class="allContent">
+    <header class="banner">
+        <h1>Hangman Web</h1>
+    </header>
+    <div class="div-center">
+        <div class="message">
+            <h2 class="{{.MessageClass}}">{{.Message}}</h2>
+            <p>Le mot était : {{.Data.Word}}</p>
+            <a href="/hangman/init">Recommencer</a>
+            <a href="/user/home">Page principale</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+{{end}}

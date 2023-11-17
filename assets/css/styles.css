@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+/*
+font-family: 'Pangolin', cursive;
+font-family: 'Permanent Marker', cursive;
+font-family: 'Solitreo', cursive;
+font-family: 'Splash', cursive;
+*/
+
+.allContent {
+    color: #fafafa;
+    width: 100%;
+    height: 100vh;
+    background-image: url('../chalkboard.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    height: fit-content;
+    font-family: 'Splash', cursive;
+    font-size: calc(2.2rem + 1.3vw);
+    color: #fafafa;
+}
+
+.link-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.all-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.play-button {
+    /*font-family: 'Splash', cursive;*/
+    font-size: calc(3.5rem + 2.2vw);
+    color: #fafafa;
+}
+
+.play-button:hover {
+    color: #008b8b;
+    font-size: calc(4rem + 2.5vw);
+}
+
+.div-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.div-center form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+    /*font-family: 'Splash', cursive;*/
+    font-size: calc(2.5rem + 1.2vw);
+}
+
+.div-center form input,select,button {
+    text-align: center;
+    width: calc(7rem + 12vw);
+    height: calc(2rem + 1vw);
+    font-size: calc(1.5rem + .7vw);
+    border-radius: calc(1.5rem + .5vw);
+}
+
+.div-center form button {
+    background-color: #1e1f22;
+    color: #fafafa;
+}
+
+.div-center form button:hover {
+    background-color: #008b8b;
+    color: #1e1f22;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.message > p {
+    /*font-family: 'Splash', cursive;*/
+    font-size: calc(2.5rem + 1.2vw);
+}

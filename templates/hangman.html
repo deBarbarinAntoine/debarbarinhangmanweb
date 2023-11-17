@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{{define "hangman"}}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/styles.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=Permanent+Marker&family=Solitreo&family=Splash&display=swap" rel="stylesheet">
+    <title>Hangman - Jeu</title>
+</head>
+<body>
+<div class="allContent">
+    <header class="banner">
+        <h1>Hangman Web</h1>
+    </header>
+    <div class="div-center">
+        <div class="message">
+            <p>Nom : {{.Game.Name}}</p>
+            <p>Difficulté : {{.Game.Difficulty}}</p>
+            <p>Dictionnaire : {{.Game.Dictionary}}</p>
+            <p>Score : {{.Game.Score}}</p>
+            <p>Nombre d'erreurs : {{.Game.NbError}}</p>
+            <p>{{.WordDisplay}}</p>
+            <p class="{{.MessageClass}}">{{.Message}}</p>
+            <p>Lettres déjà jouées : {{.RunesPlayed}}</p>
+            <form action="/hangman/checkInput" method="post">
+                <label for="input">Lettre ou mot à proposer :</label>
+                <input type="text" name="input" id="input" placeholder="Proposition">
+                <button type="submit">Valider</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+{{end}}

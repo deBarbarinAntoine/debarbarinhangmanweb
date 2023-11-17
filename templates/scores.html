@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{{define "scores"}}
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../static/css/styles.css" type="text/css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=Permanent+Marker&family=Solitreo&family=Splash&display=swap" rel="stylesheet">
+        <title>Scores - Hangman</title>
+    </head>
+    <body>
+        <div class="allContent">
+            <header class="banner">
+                <h1>Hangman Web</h1>
+            </header>
+            <div class="div-center">
+                {{range .}}
+                <div class="score">
+                <span>Nom : </span>
+                <span>{{.Name}}</span>
+                <span>Score :</span>
+                <span>{{.Score}}</span>
+                <span>Mot : </span>
+                <span>{{.Word}}</span>
+                <span>Difficulté : </span>
+                <span>{{.Difficulty}}</span>
+                <span>Dictionnaire : </span>
+                <span>{{.Dictionary}}</span>
+                </div>
+                {{end}}
+            </div>
+        </div>
+    </body>
+</html>
+{{end}}

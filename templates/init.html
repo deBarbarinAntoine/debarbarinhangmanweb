@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{{define "init"}}
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../static/css/styles.css" type="text/css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=Permanent+Marker&family=Solitreo&family=Splash&display=swap" rel="stylesheet">
+        <title>Init - Hangman</title>
+    </head>
+    <body>
+        <div class="allContent">
+            <header class="banner">
+                <h1>Hangman Web</h1>
+            </header>
+            <div class="div-center">
+                <form action="/hangman/init/treatment" method="post">
+                    <label for="username">Pseudo :</label>
+                    <input type="text" name="username" id="username" placeholder="Pseudo" required>
+                    <label for="difficulty">Difficulté :</label>
+                    <select name="difficulty" id="difficulty">
+                        <option value="easy">Facile</option>
+                        <option value="medium">Intermédiaire</option>
+                        <option value="difficult">Difficile</option>
+                        <option value="legendary">Légendaire</option>
+                    </select>
+                    <button type="submit">Valider</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
+{{end}}
