@@ -14,13 +14,6 @@ import (
 
 var fileName = "../Files/accounts.thorg"
 
-type User struct {
-	Name       string
-	Password   string
-	Dictionary string
-	Difficulty string
-}
-
 type UserNotFoundError struct{}
 
 func (m *UserNotFoundError) Error() string {

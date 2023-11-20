@@ -22,4 +22,5 @@
 {"Name":"Thorgan","Score":82,"Word":"protohistoriens","Difficulty":"Légendaire","Dictionary":"Scrabble"},
 {"Name":"Thorgan","Score":16,"Word":"bati","Difficulty":"Facile","Dictionary":"Scrabble"},
 {"Name":"Nico","Score":26,"Word":"baptisat","Difficulty":"Difficile","Dictionary":"Scrabble"},
-{"Name":"Roméo","Score":41,"Word":"monnayees","Difficulty":"Difficile","Dictionary":"Scrabble"}
+{"Name":"Roméo","Score":41,"Word":"monnayees","Difficulty":"Difficile","Dictionary":"Scrabble"},
+{"Name":"Antoine","Score":31,"Word":"unie","Difficulty":"Facile","Dictionary":"Scrabble"}

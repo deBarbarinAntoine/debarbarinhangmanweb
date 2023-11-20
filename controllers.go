@@ -2,36 +2,15 @@ package HangmanWeb
 
 import (
 	"fmt"
-	"html/template"
 	"log"
 	"net/http"
-	"os/exec"
 	"strings"
-	"time"
 
 	hangman "github.com/debarbarinantoine/hangmancli"
 )
 
-type GameData struct {
-	status       int
-	Message      string
-	MessageClass string
-	RunesPlayed  string
-	WordDisplay  string
-	Game         hangman.Game
-}
-
-type Session struct {
-	isOpen    bool
-	isPlaying bool
-	user      User
-	gameData  GameData
-}
-
 var incorrectLogin bool
 var mySession Session
-
-var tmpl *template.Template
 
 // func rootHandler(w http.ResponseWriter, r *http.Request) {
 // 	if mySession.isPlaying {
@@ -337,58 +316,4 @@ func resetHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		http.Redirect(w, r, "/user/login", http.StatusMovedPermanently)
 	}
-}
-
-func routes() {
-	//http.HandleFunc("/", rootHandler)
-	http.HandleFunc("/index", indexHandler)
-	http.HandleFunc("/user/create", createUserHandler)
-	http.HandleFunc("/user/creatingUser", creatingUserHandler)
-	http.HandleFunc("/user/login", loginHandler)
-	http.HandleFunc("/user/login/check", openSessionHandler)
-	http.HandleFunc("/user/home", homeHandler)
-	http.HandleFunc("/user/home/scores", scoresHandler)
-	http.HandleFunc("/user/logout/", logoutHandler)
-	http.HandleFunc("/hangman/init", initHandler)
-	http.HandleFunc("/hangman/init/treatment", treatmentHandler)
-	http.HandleFunc("/hangman", hangmanHandler)
-	http.HandleFunc("/hangman/checkInput", checkInputHandler)
-	http.HandleFunc("/hangman/endgame", endgameHandler)
-	http.HandleFunc("/hangman/reset", resetHandler)
-}
-
-func fileServer() {
-	fs := http.FileServer(http.Dir("../assets"))
-	http.Handle("/static/", http.StripPrefix("/static/", fs))
-}
-
-func runServer() {
-	port := "localhost:8080"
-	url := "http://" + port + "/home"
-	go http.ListenAndServe(port, nil)
-	fmt.Println("Server is running...")
-	time.Sleep(time.Second * 5)
-	cmd := exec.Command("explorer", url)
-	cmd.Run()
-	fmt.Println("If the navigator didn't open on its own, just go to ", url, " on your navigator.")
-	isRunning := true
-	for isRunning {
-		fmt.Print("If you want to end the server, type 'stop' here :")
-		var command string
-		fmt.Scanln(&command)
-		if command == "stop" {
-			isRunning = false
-		}
-	}
-}
-
-func Run() {
-	var err error
-	tmpl, err = template.ParseGlob("../templates/*.html")
-	if err != nil {
-		log.Fatal(err)
-	}
-	routes()
-	fileServer()
-	runServer()
 }

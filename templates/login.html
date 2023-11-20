@@ -16,14 +16,19 @@
                 <h1>Hangman Web</h1>
             </header>
             <div class="div-center">
+                <div>
                 <form action="/user/login/check" method="post">
                     <label for="username">Pseudo :</label>
                     <input type="text" name="username" id="username" placeholder="Pseudo" required>
                     <label for="password">Mot de passe :</label>
                     <input type="password" name="password" id="password" required>
                     <button type="submit">Valider</button>
-                    <a href="/user/create" class="play-button">S'inscrire</a>
+                    <!--<a href="/user/create" class="play-button">S'inscrire</a>-->
                 </form>
+                <form action="/user/create" method="post">
+                    <button type="submit">S'inscrire</button>
+                </form>
+                </div>
             </div>
         </div>
     </body>

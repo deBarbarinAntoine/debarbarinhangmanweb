@@ -27,7 +27,7 @@
             <p>Lettres déjà jouées : {{.RunesPlayed}}</p>
             <form action="/hangman/checkInput" method="post">
                 <label for="input">Lettre ou mot à proposer :</label>
-                <input type="text" name="input" id="input" placeholder="Proposition">
+                <input type="text" name="input" id="input" placeholder="Proposition" autofocus>
                 <button type="submit">Valider</button>
             </form>
         </div>
