@@ -8,9 +8,6 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Homemade+Apple&display=swap" rel="stylesheet">
-        <!--<link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=Permanent+Marker&family=Solitreo&family=Splash&display=swap" rel="stylesheet">-->
         <title>Modification utilisateur - Hangman</title>
     </head>
     <body>
@@ -25,7 +22,7 @@
                     <form action="/user/modify/update" method="post">
                         <label for="username">Pseudo :</label>
                         <input type="text" name="username" id="username" value="{{.MyUser.Name}}" required>
-                        <label for="password">Ancien mot de passe :</label>
+                        <label for="password" autofocus>Ancien mot de passe :</label>
                         <input type="password" name="password" id="password" required>
                         <label for="newPassword">Nouveau mot de passe :</label>
                         <input type="password" name="newPassword" id="newPassword" required>

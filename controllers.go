@@ -239,6 +239,7 @@ func treatmentHandler(w http.ResponseWriter, r *http.Request) {
 		mySession.MyGameData.Game.Difficulty = difficulty
 		mySession.MyGameData.Game.Dictionary = "../Files/Dictionaries/" + r.FormValue("dictionary") + ".txt"
 		mySession.MyUser.Dictionary = r.FormValue("dictionary")
+		mySession.MyUser.modifyUser(mySession.MyUser)
 		mySession.MyGameData.Game.InitGame()
 		mySession.MyGameData.Game.Dictionary = mySession.MyUser.Dictionary
 		mySession.MyGameData.RunesPlayed = string(mySession.MyGameData.Game.RunesPlayed)
@@ -370,8 +371,10 @@ func resetHandler(w http.ResponseWriter, r *http.Request) {
 	if !redirect(INGAME, w, r) {
 		return
 	}
+	fmt.Println("exiting game...")
 	mySession.MyGameData = GameData{}
 	mySession.isPlaying = false
+	fmt.Println("isPlaying: ", mySession.isPlaying)
 	http.Redirect(w, r, "/user/home", http.StatusSeeOther)
 }
 
@@ -402,27 +405,27 @@ func redirect(status int, w http.ResponseWriter, r *http.Request) bool {
 	}
 	if mySession.isPlaying {
 		if isGameRoute {
-			fmt.Println("Correct game route")
+			//fmt.Println("Correct game route")
 			return true
 		} else {
-			fmt.Println("Incorrect game route")
+			//fmt.Println("Incorrect game route")
 			redirectGame(w, r)
 			return false
 		}
 	} else if mySession.isOpen {
 		if isSessionRoute {
-			fmt.Println("Correct session route")
+			//fmt.Println("Correct session route")
 			return true
 		} else {
-			fmt.Println("Incorrect session route")
+			//fmt.Println("Incorrect session route")
 			redirectSession(w, r)
 			return false
 		}
 	} else if !isGameRoute && !isSessionRoute {
-		fmt.Println("Correct visitor route")
+		//fmt.Println("Correct visitor route")
 		return true
 	} else {
-		fmt.Println("Incorrect visitor route")
+		//fmt.Println("Incorrect visitor route")
 		redirectIndex(w, r)
 		return false
 	}

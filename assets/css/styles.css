@@ -25,14 +25,8 @@ font-family: 'Homemade Apple', cursive;
     height: fit-content;
     background-image: url('../chalkboard.jpg');
     background-repeat: no-repeat repeat;
-    background-size: contain;
+    background-size: 100%;
 }
-
-/*.fixedContent {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-}*/
 
 .banner {
     display: flex;
@@ -74,10 +68,16 @@ font-family: 'Homemade Apple', cursive;
 }
 
 .stats a {
+    font-size: calc(1.5rem + .7vw);
+    padding: calc(.5rem + .3vw) calc(1.5rem + .7vw);
+    border: .2rem dashed #fafafa;
+    border-radius: calc(1.5rem + .5vw);
     color: #fafafa;
 }
 
 .stats a:hover {
+    border: .2rem dashed #008b8b;
+    font-weight: bold;
     color: #008b8b;
 }
 
@@ -126,6 +126,10 @@ font-family: 'Homemade Apple', cursive;
     justify-content: center;
     align-items: center;
     height: 100%;
+}
+
+.message h2 {
+    font-family: 'Fredericka the Great', serif;
 }
 
 form {
@@ -204,9 +208,7 @@ form button:hover {
 .scoreTitleCell {
     font-weight: bold;
     font-size: calc(1rem + 1vw);
-    border-right-width: .1rem;
-    border-right-style: solid;
-    border-right-color: #fafafa;
+    border-right: .1rem solid #fafafa;
 }
 
 .lastScoreTitleCell {
@@ -217,9 +219,7 @@ form button:hover {
 .scoreCell {
     padding: calc(.6rem + .4vw) calc(1rem + .8vw);
     font-size: calc(.8rem + .9vw);
-    border-right-width: .1rem;
-    border-right-style: solid;
-    border-right-color: #fafafa;
+    border-right: .1rem solid #fafafa;
 }
 
 .lastScoreCell {
@@ -229,4 +229,8 @@ form button:hover {
 
 .red {
     color: #ff0000;
+}
+
+.alert {
+    color: #ff4500;
 }

@@ -8,9 +8,6 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Homemade+Apple&display=swap" rel="stylesheet">
-        <!--<link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=Permanent+Marker&family=Solitreo&family=Splash&display=swap" rel="stylesheet">-->
         <title>Login - Hangman</title>
     </head>
     <body>
@@ -22,7 +19,7 @@
                 <div>
                 <form action="/user/login/check" method="post">
                     <label for="username">Pseudo :</label>
-                    <input type="text" name="username" id="username" placeholder="Pseudo" required>
+                    <input type="text" name="username" id="username" placeholder="Pseudo" required autofocus>
                     <label for="password">Mot de passe :</label>
                     <input type="password" name="password" id="password" required>
                     <button type="submit">Valider</button>

@@ -29,4 +29,7 @@
 {"Name":"Roméo","Score":95,"Word":"debroussaillez","Difficulty":"Légendaire","Dictionary":"français"},
 {"Name":"Thorgan","Score":11,"Word":"crocs","Difficulty":"Intermédiaire","Dictionary":"français"},
 {"Name":"Antoine","Score":-9,"Word":"pu","Difficulty":"Facile","Dictionary":"italien"},
-{"Name":"Antoine","Score":46,"Word":"immoral","Difficulty":"Intermédiaire","Dictionary":"anglais"}
+{"Name":"Antoine","Score":46,"Word":"immoral","Difficulty":"Intermédiaire","Dictionary":"anglais"},
+{"Name":"Thorgan","Score":20,"Word":"kawa","Difficulty":"Facile","Dictionary":"français"},
+{"Name":"Thorgan","Score":26,"Word":"bele","Difficulty":"Facile","Dictionary":"français"},
+{"Name":"Thorgan","Score":62,"Word":"parrainassiez","Difficulty":"Légendaire","Dictionary":"français"}
