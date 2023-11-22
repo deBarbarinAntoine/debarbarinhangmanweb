@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"sort"
 	"strings"
 
 	hangman "github.com/debarbarinantoine/hangmancli"
@@ -152,6 +153,7 @@ func scoresHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	savedGames := hangman.RetreiveSavedGames("../Files/scores.txt")
+	sort.SliceStable(savedGames, func(i, j int) bool { return savedGames[i].Score > savedGames[j].Score })
 	if savedGames != nil {
 		err := tmpl.ExecuteTemplate(w, "scores", savedGames)
 		if err != nil {
@@ -220,12 +222,16 @@ func treatmentHandler(w http.ResponseWriter, r *http.Request) {
 		var difficulty int
 		switch r.FormValue("difficulty") {
 		case "easy":
+			mySession.MyUser.Difficulty = "Facile"
 			difficulty = hangman.EASY
 		case "medium":
+			mySession.MyUser.Difficulty = "Intermédiaire"
 			difficulty = hangman.MEDIUM
 		case "difficult":
+			mySession.MyUser.Difficulty = "Difficile"
 			difficulty = hangman.DIFFICULT
 		case "legendary":
+			mySession.MyUser.Difficulty = "Légendaire"
 			difficulty = hangman.LEGENDARY
 		}
 		mySession.isPlaying = true
@@ -275,7 +281,7 @@ func hangmanHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	mySession.MyGameData.RunesPlayed = string(mySession.MyGameData.Game.RunesPlayed)
 	mySession.MyGameData.WordDisplay = string(mySession.MyGameData.Game.WordDisplay)
-	err := tmpl.ExecuteTemplate(w, "hangman", mySession.MyGameData)
+	err := tmpl.ExecuteTemplate(w, "hangman", mySession)
 	if err != nil {
 		log.Fatal(err)
 	}

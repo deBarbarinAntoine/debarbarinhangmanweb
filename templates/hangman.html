@@ -21,14 +21,14 @@
     <div class="mainContent">
         <div class="div-center">
             <div class="message">
-                <p>Nom : {{.Game.Name}}</p>
-                <p>Difficulté : {{.Game.Difficulty}}</p>
-                <p>Dictionnaire : {{.Game.Dictionary}}</p>
-                <p>Score : {{.Game.Score}}</p>
-                <p>Nombre d'erreurs : {{.Game.NbError}}</p>
-                <p>{{.WordDisplay}}</p>
-                <p class="{{.MessageClass}}">{{.Message}}</p>
-                <p>Lettres déjà jouées : {{.RunesPlayed}}</p>
+                <p>Nom : {{.MyGameData.Game.Name}}</p>
+                <p>Difficulté : {{.MyUser.Difficulty}}</p>
+                <p>Dictionnaire : {{.MyGameData.Game.Dictionary}}</p>
+                <p>Score : {{.MyGameData.Game.Score}}</p>
+                <p>Nombre d'erreurs : {{.MyGameData.Game.NbError}}</p>
+                <p>{{.MyGameData.WordDisplay}}</p>
+                <p class="{{.MyGameData.MessageClass}}">{{.MyGameData.Message}}</p>
+                <p>Lettres déjà jouées : {{.MyGameData.RunesPlayed}}</p>
                 <form action="/hangman/checkInput" method="post">
                     <label for="input">Lettre ou mot à proposer :</label>
                     <input type="text" name="input" id="input" placeholder="Proposition" autofocus>

@@ -24,8 +24,8 @@ font-family: 'Homemade Apple', cursive;
     min-height: 100vh;
     height: fit-content;
     background-image: url('../chalkboard.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-repeat: no-repeat repeat;
+    background-size: contain;
 }
 
 /*.fixedContent {
@@ -70,6 +70,15 @@ font-family: 'Homemade Apple', cursive;
     gap: calc(1.6rem + 1.2vh);
     border-right: .3rem solid #fafafa;
     font-size: calc(1rem + .8vw);
+    font-family: 'Fredericka the Great', serif;
+}
+
+.stats a {
+    color: #fafafa;
+}
+
+.stats a:hover {
+    color: #008b8b;
 }
 
 .mainContent {
@@ -189,16 +198,28 @@ form button:hover {
     color: #fafafa;
     border: .1rem solid #fafafa;
     text-align: center;
-    width: 80%;
+    margin: 2rem 0 calc(5rem + 3.5vw) 0;
 }
 
 .scoreTitleCell {
     font-weight: bold;
     font-size: calc(1rem + 1vw);
+    border-right: .1rem solid #fafafa;
+}
+
+.lastScoreTitleCell {
+    font-weight: bold;
+    font-size: calc(1rem + 1vw);
 }
 
 .scoreCell {
-    padding: calc(.5rem + .3vw) calc(.3rem + .2vw);
+    padding: calc(.6rem + .4vw) calc(1rem + .8vw);
+    font-size: calc(.8rem + .9vw);
+    border-right: .1rem solid #fafafa;
+}
+
+.lastScoreCell {
+    padding: calc(.6rem + .4vw) calc(1rem + .8vw);
     font-size: calc(.8rem + .9vw);
 }
 

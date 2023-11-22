@@ -18,26 +18,28 @@
         <div class="allContent">
             <header class="banner">
                 <a href="/user/home"><span class="material-symbols-outlined">arrow_back</span></a>
-                <h1>Hangman Web</h1>
+                <h1>Meilleurs scores</h1>
                 <a href="/session/logout"><span class="material-symbols-outlined">logout</span></a>
             </header>
             <div class="mainContent">
                 <div class="div-center">
                     <table class="tableScore">
                         <tr>
+                            <th class="scoreCell scoreTitleCell">Rang</th>
                             <th class="scoreCell scoreTitleCell">Nom</th>
                             <th class="scoreCell scoreTitleCell">Score</th>
                             <th class="scoreCell scoreTitleCell">Mot</th>
                             <th class="scoreCell scoreTitleCell">Difficulté</th>
-                            <th class="scoreCell scoreTitleCell">Dictionnaire</th>
+                            <th class="lastScoreCell lastScoreTitleCell">Dictionnaire</th>
                         </tr>
-                        {{range .}}
+                        {{range $i, $game := .}}
                         <tr class="score">
-                            <td class="scoreCell">{{.Name}}</td>
-                            <td class="scoreCell">{{.Score}}</td>
-                            <td class="scoreCell">{{.Word}}</td>
-                            <td class="scoreCell">{{.Difficulty}}</td>
-                            <td class="scoreCell">{{.Dictionary}}</td>
+                            <td class="scoreCell">{{$i}}</td>
+                            <td class="scoreCell">{{$game.Name}}</td>
+                            <td class="scoreCell">{{$game.Score}}</td>
+                            <td class="scoreCell">{{$game.Word}}</td>
+                            <td class="scoreCell">{{$game.Difficulty}}</td>
+                            <td class="lastScoreCell">{{$game.Dictionary}}</td>
                         </tr>
                         {{end}}
 
