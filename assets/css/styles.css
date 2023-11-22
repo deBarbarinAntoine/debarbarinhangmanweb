@@ -204,7 +204,9 @@ form button:hover {
 .scoreTitleCell {
     font-weight: bold;
     font-size: calc(1rem + 1vw);
-    border-right: .1rem solid #fafafa;
+    border-right-width: .1rem;
+    border-right-style: solid;
+    border-right-color: #fafafa;
 }
 
 .lastScoreTitleCell {
@@ -215,7 +217,9 @@ form button:hover {
 .scoreCell {
     padding: calc(.6rem + .4vw) calc(1rem + .8vw);
     font-size: calc(.8rem + .9vw);
-    border-right: .1rem solid #fafafa;
+    border-right-width: .1rem;
+    border-right-style: solid;
+    border-right-color: #fafafa;
 }
 
 .lastScoreCell {
