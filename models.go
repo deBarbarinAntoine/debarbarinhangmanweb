@@ -3,10 +3,10 @@ package HangmanWeb
 import hangman "github.com/debarbarinantoine/hangmancli"
 
 type Session struct {
-	isOpen    bool
-	isPlaying bool
-	user      User
-	gameData  GameData
+	isOpen     bool
+	isPlaying  bool
+	MyUser     User
+	MyGameData GameData
 }
 
 type User struct {

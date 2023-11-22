@@ -11,6 +11,7 @@ import (
 
 // var incorrectLogin bool
 var mySession Session
+var dictionaries = []string{"français", "anglais", "italien"}
 
 const (
 	INGAME    = 30
@@ -18,15 +19,9 @@ const (
 	OUT       = 32
 )
 
-// func rootHandler(w http.ResponseWriter, r *http.Request) {
-// 	if mySession.isPlaying {
-// 		http.Redirect(w, r, "/hangman", http.StatusMovedPermanently)
-// 	} else if mySession.isOpen {
-// 		http.Redirect(w, r, "/user/home", http.StatusMovedPermanently)
-// 	} else {
-// 		http.Redirect(w, r, "/index", http.StatusMovedPermanently)
-// 	}
-// }
+func rootHandler(w http.ResponseWriter, r *http.Request) {
+	http.Redirect(w, r, "/index", http.StatusMovedPermanently)
+}
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	if !redirect(OUT, w, r) {
@@ -93,18 +88,63 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	if !redirect(INSESSION, w, r) {
 		return
 	}
-	err := tmpl.ExecuteTemplate(w, "home", nil)
+	var nbGames, maxScore, totalScore int
+	dictionaryUse := make(map[string]int)
+	allGames := hangman.RetreiveSavedGames("../Files/scores.txt")
+	for _, game := range allGames {
+		if game.Name == mySession.MyUser.Name {
+			nbGames++
+			totalScore += game.Score
+			if game.Score > maxScore {
+				maxScore = game.Score
+			}
+			dictionaryUse[game.Dictionary]++
+		}
+	}
+	var err error
+	if nbGames != 0 {
+		averageScore := totalScore / nbGames
+		var favoriteDictionary string
+		var maxUsed int
+		for dictionary, nbUsed := range dictionaryUse {
+			if nbUsed > 0 && nbUsed > maxUsed {
+				favoriteDictionary = dictionary
+				maxUsed = nbUsed
+			}
+		}
+		homeData := struct {
+			Name               string
+			NbGames            int
+			MaxScore           int
+			AverageScore       int
+			FavoriteDictionary string
+		}{
+			Name:               mySession.MyUser.Name,
+			NbGames:            nbGames,
+			MaxScore:           maxScore,
+			AverageScore:       averageScore,
+			FavoriteDictionary: favoriteDictionary,
+		}
+		err = tmpl.ExecuteTemplate(w, "home", homeData)
+	} else {
+		homeData := struct {
+			Name               string
+			NbGames            int
+			MaxScore           int
+			AverageScore       int
+			FavoriteDictionary string
+		}{
+			Name:               mySession.MyUser.Name,
+			NbGames:            nbGames,
+			MaxScore:           maxScore,
+			AverageScore:       0,
+			FavoriteDictionary: "aucun",
+		}
+		err = tmpl.ExecuteTemplate(w, "home", homeData)
+	}
 	if err != nil {
 		log.Fatal(err)
 	}
-}
-
-func logoutHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("logout")
-	mySession.Close()
-	fmt.Println("From handler:")
-	fmt.Printf("%#v\n", mySession)
-	http.Redirect(w, r, "/index", http.StatusMovedPermanently)
 }
 
 func scoresHandler(w http.ResponseWriter, r *http.Request) {
@@ -122,11 +162,51 @@ func scoresHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func modifyUserHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("modify user")
+	tmpl.ExecuteTemplate(w, "modify", mySession)
+	mySession.MyGameData.Message = ""
+	mySession.MyGameData.MessageClass = ""
+}
+
+func updateUserHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("update user")
+	username := r.FormValue("username")
+	newPassword := r.FormValue("newPassword")
+	if (checkUsername(username) || username == mySession.MyUser.Name) && mySession.MyUser.Password == r.FormValue("password") && len(newPassword) > 5 {
+		fmt.Println("Previous name: ", mySession.MyUser.Name)
+		fmt.Println("Previous password: ", mySession.MyUser.Password)
+		fmt.Println()
+		newUser := User{Name: username, Password: newPassword}
+		err := mySession.MyUser.modifyUser(newUser)
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println("New name: ", mySession.MyUser.Name)
+		fmt.Println("New password: ", mySession.MyUser.Password)
+		fmt.Println()
+		http.Redirect(w, r, "/user/home", http.StatusMovedPermanently)
+	} else {
+		mySession.MyGameData.Message = "Données invalides !"
+		mySession.MyGameData.MessageClass = "message red"
+		fmt.Println("Error: ", mySession.MyGameData.Message)
+		http.Redirect(w, r, "/user/modify", http.StatusSeeOther)
+	}
+}
+
+func logoutHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("logout")
+	mySession.Close()
+	fmt.Println("From handler:")
+	fmt.Printf("%#v\n", mySession)
+	http.Redirect(w, r, "/index", http.StatusMovedPermanently)
+}
+
 func initHandler(w http.ResponseWriter, r *http.Request) {
 	if !redirect(INSESSION, w, r) {
 		return
 	}
-	err := tmpl.ExecuteTemplate(w, "init", nil)
+	err := tmpl.ExecuteTemplate(w, "init", dictionaries)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -149,12 +229,14 @@ func treatmentHandler(w http.ResponseWriter, r *http.Request) {
 			difficulty = hangman.LEGENDARY
 		}
 		mySession.isPlaying = true
-		mySession.gameData.Game.Name = r.FormValue("username")
-		mySession.gameData.Game.Difficulty = difficulty
-		mySession.gameData.Game.Dictionary = "../Files/Dictionaries/ods5.txt"
-		mySession.gameData.Game.InitGame()
-		mySession.gameData.RunesPlayed = string(mySession.gameData.Game.RunesPlayed)
-		mySession.gameData.WordDisplay = string(mySession.gameData.Game.WordDisplay)
+		mySession.MyGameData.Game.Name = mySession.MyUser.Name
+		mySession.MyGameData.Game.Difficulty = difficulty
+		mySession.MyGameData.Game.Dictionary = "../Files/Dictionaries/" + r.FormValue("dictionary") + ".txt"
+		mySession.MyUser.Dictionary = r.FormValue("dictionary")
+		mySession.MyGameData.Game.InitGame()
+		mySession.MyGameData.Game.Dictionary = mySession.MyUser.Dictionary
+		mySession.MyGameData.RunesPlayed = string(mySession.MyGameData.Game.RunesPlayed)
+		mySession.MyGameData.WordDisplay = string(mySession.MyGameData.Game.WordDisplay)
 		http.Redirect(w, r, "/hangman/game", http.StatusMovedPermanently)
 	} else {
 		http.Redirect(w, r, "/hangman/init", http.StatusMovedPermanently)
@@ -165,35 +247,35 @@ func hangmanHandler(w http.ResponseWriter, r *http.Request) {
 	if !redirect(INGAME, w, r) {
 		return
 	}
-	if mySession.gameData.status == hangman.WIN || mySession.gameData.status == hangman.LOOSE {
+	if mySession.MyGameData.status == hangman.WIN || mySession.MyGameData.status == hangman.LOOSE {
 		http.Redirect(w, r, "/hangman/endgame", http.StatusMovedPermanently)
 	}
-	switch mySession.gameData.status {
+	switch mySession.MyGameData.status {
 	case 0:
-		mySession.gameData.Message = ""
-		mySession.gameData.MessageClass = "none"
+		mySession.MyGameData.Message = ""
+		mySession.MyGameData.MessageClass = "none"
 	case hangman.ALREADYPLAYED:
-		mySession.gameData.Message = "Vous avez déjà joué cette lettre !"
-		mySession.gameData.MessageClass = "alert"
+		mySession.MyGameData.Message = "Vous avez déjà joué cette lettre !"
+		mySession.MyGameData.MessageClass = "alert"
 	case hangman.CORRECTRUNE:
-		mySession.gameData.Message = ""
-		mySession.gameData.MessageClass = "none"
+		mySession.MyGameData.Message = ""
+		mySession.MyGameData.MessageClass = "none"
 	case hangman.INCORRECTRUNE:
-		mySession.gameData.Message = "Lettre incorrecte !"
-		mySession.gameData.MessageClass = "alert"
+		mySession.MyGameData.Message = "Lettre incorrecte !"
+		mySession.MyGameData.MessageClass = "alert"
 	case hangman.CORRECTWORD:
-		mySession.gameData.Message = ""
-		mySession.gameData.MessageClass = "none"
+		mySession.MyGameData.Message = ""
+		mySession.MyGameData.MessageClass = "none"
 	case hangman.INCORRECTWORD:
-		mySession.gameData.Message = "Mot incorrect !"
-		mySession.gameData.MessageClass = "alert"
+		mySession.MyGameData.Message = "Mot incorrect !"
+		mySession.MyGameData.MessageClass = "alert"
 	case hangman.INCORRECTINPUT:
-		mySession.gameData.Message = "Saisie incorrecte !"
-		mySession.gameData.MessageClass = "alert"
+		mySession.MyGameData.Message = "Saisie incorrecte !"
+		mySession.MyGameData.MessageClass = "alert"
 	}
-	mySession.gameData.RunesPlayed = string(mySession.gameData.Game.RunesPlayed)
-	mySession.gameData.WordDisplay = string(mySession.gameData.Game.WordDisplay)
-	err := tmpl.ExecuteTemplate(w, "hangman", mySession.gameData)
+	mySession.MyGameData.RunesPlayed = string(mySession.MyGameData.Game.RunesPlayed)
+	mySession.MyGameData.WordDisplay = string(mySession.MyGameData.Game.WordDisplay)
+	err := tmpl.ExecuteTemplate(w, "hangman", mySession.MyGameData)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -210,24 +292,24 @@ func checkInputHandler(w http.ResponseWriter, r *http.Request) {
 	input := r.FormValue("input")
 	fmt.Println("input: ", input)
 	if len(input) > 1 && hangman.CheckInputFormat(input) {
-		mySession.gameData.status = mySession.gameData.Game.CheckWord(input)
-		mySession.gameData.Game.CountScore(mySession.gameData.status)
-		if mySession.gameData.status == hangman.CORRECTWORD {
-			mySession.gameData.Game.RevealWord()
+		mySession.MyGameData.status = mySession.MyGameData.Game.CheckWord(input)
+		mySession.MyGameData.Game.CountScore(mySession.MyGameData.status)
+		if mySession.MyGameData.status == hangman.CORRECTWORD {
+			mySession.MyGameData.Game.RevealWord()
 		}
-		fmt.Println("mySession.gameData.status = ", mySession.gameData.status)
+		fmt.Println("mySession.gameData.status = ", mySession.MyGameData.status)
 	} else if len(input) == 1 && hangman.CheckInputFormat(input) {
 		input = strings.ToUpper(input)
-		mySession.gameData.status = mySession.gameData.Game.CheckRune([]rune(input)[0])
-		mySession.gameData.Game.DisplayWord([]rune(strings.ToLower(input))[0])
-		mySession.gameData.Game.CountScore(mySession.gameData.status)
-		fmt.Println("mySession.gameData.status = ", mySession.gameData.status)
+		mySession.MyGameData.status = mySession.MyGameData.Game.CheckRune([]rune(input)[0])
+		mySession.MyGameData.Game.DisplayWord([]rune(strings.ToLower(input))[0])
+		mySession.MyGameData.Game.CountScore(mySession.MyGameData.status)
+		fmt.Println("mySession.gameData.status = ", mySession.MyGameData.status)
 	} else {
-		mySession.gameData.status = hangman.INCORRECTINPUT
-		fmt.Println("mySession.gameData.status = ", mySession.gameData.status)
+		mySession.MyGameData.status = hangman.INCORRECTINPUT
+		fmt.Println("mySession.gameData.status = ", mySession.MyGameData.status)
 	}
-	if endgameStatus, endgame := mySession.gameData.Game.CheckEndgame(9); endgame {
-		mySession.gameData.status = endgameStatus
+	if endgameStatus, endgame := mySession.MyGameData.Game.CheckEndgame(9); endgame {
+		mySession.MyGameData.status = endgameStatus
 		http.Redirect(w, r, "/hangman/endgame", http.StatusMovedPermanently)
 	} else {
 		http.Redirect(w, r, "/hangman/game", http.StatusSeeOther)
@@ -238,13 +320,13 @@ func endgameHandler(w http.ResponseWriter, r *http.Request) {
 	if !redirect(INGAME, w, r) {
 		return
 	}
-	if mySession.gameData.status == hangman.WIN || mySession.gameData.status == hangman.LOOSE {
+	if mySession.MyGameData.status == hangman.WIN || mySession.MyGameData.status == hangman.LOOSE {
 		var imgSrc, imgAlt, message, messageClass string
-		if mySession.gameData.status == hangman.WIN {
-			mySession.gameData.Game.SaveGame("../Files/scores.txt")
+		if mySession.MyGameData.status == hangman.WIN {
+			mySession.MyGameData.Game.SaveGame("../Files/scores.txt", true)
 			imgSrc = "victory"
 			imgAlt = "victory"
-			message = "Félicitations " + mySession.gameData.Game.Name + ", vous avez gagné !"
+			message = "Félicitations " + mySession.MyGameData.Game.Name + ", vous avez gagné !"
 			messageClass = "victory"
 		} else {
 			imgSrc = "loss"
@@ -263,9 +345,9 @@ func endgameHandler(w http.ResponseWriter, r *http.Request) {
 			ImgAlt:       imgAlt,
 			Message:      message,
 			MessageClass: messageClass,
-			Data:         mySession.gameData.Game,
+			Data:         mySession.MyGameData.Game,
 		}
-		mySession.gameData = GameData{}
+		mySession.MyGameData = GameData{}
 		mySession.isPlaying = false
 		err := tmpl.ExecuteTemplate(w, "endgame", endGameData)
 		if err != nil {
@@ -282,7 +364,7 @@ func resetHandler(w http.ResponseWriter, r *http.Request) {
 	if !redirect(INGAME, w, r) {
 		return
 	}
-	mySession.gameData = GameData{}
+	mySession.MyGameData = GameData{}
 	mySession.isPlaying = false
 	http.Redirect(w, r, "/user/home", http.StatusSeeOther)
 }

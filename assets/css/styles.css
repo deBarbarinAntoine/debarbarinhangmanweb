@@ -13,27 +13,77 @@ font-family: 'Pangolin', cursive;
 font-family: 'Permanent Marker', cursive;
 font-family: 'Solitreo', cursive;
 font-family: 'Splash', cursive;
+
+font-family: 'Fredericka the Great', serif;
+font-family: 'Homemade Apple', cursive;
 */
 
 .allContent {
     color: #fafafa;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
+    height: fit-content;
     background-image: url('../chalkboard.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 }
 
+/*.fixedContent {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}*/
+
 .banner {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    position: fixed;
     width: 100%;
     height: fit-content;
-    font-family: 'Splash', cursive;
+    font-family: 'Fredericka the Great', serif;
+    /*font-family: 'Homemade Apple', cursive;*/
     font-size: calc(2.2rem + 1.3vw);
     color: #fafafa;
+}
+
+.banner span {
+    font-size: calc(2.5rem + 1.5vw);
+    color: #fafafa;
+}
+
+.banner span:hover {
+    color: #008b8b;
+}
+
+.stats {
+    position: fixed;
+    top: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    margin: calc(5.5rem + 3.5vw) 0 0 calc(1.2rem + 1vw);
+    padding: 0 calc(1.2rem + 1vw) 0 0;
+    height: 50%;
+    max-height: fit-content;
+    width: fit-content;
+    gap: calc(1.6rem + 1.2vh);
+    border-right: .3rem solid #fafafa;
+    font-size: calc(1rem + .8vw);
+}
+
+.mainContent {
+    padding: calc(7rem + 4vw) 0 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: calc(100% - calc(7rem + 4vw));
+}
+
+.mainContent h2 {
+    font-size: calc(3.2rem + 1.6vw);
+    font-weight: normal;
+    font-family: 'Fredericka the Great', serif;
 }
 
 .link-content {
@@ -41,7 +91,7 @@ font-family: 'Splash', cursive;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100%;
+    height: 50%;
 }
 
 .all-center {
@@ -52,6 +102,7 @@ font-family: 'Splash', cursive;
 
 .play-button {
     /*font-family: 'Splash', cursive;*/
+    font-family: 'Fredericka the Great', serif;
     font-size: calc(3.5rem + 2.2vw);
     color: #fafafa;
 }
@@ -68,31 +119,39 @@ font-family: 'Splash', cursive;
     height: 100%;
 }
 
-.div-center form {
+form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4rem;
+    gap: 2.2rem;
+    margin: 3rem auto;
     /*font-family: 'Splash', cursive;*/
-    font-size: calc(2.5rem + 1.2vw);
+    font-family: 'Fredericka the Great', serif;
+    font-size: calc(1.8rem + 1.2vw);
 }
 
-.div-center form input,select,button {
+form input,select,button {
     text-align: center;
-    width: calc(7rem + 12vw);
-    height: calc(2rem + 1vw);
+    width: calc(9rem + 14vw);
+    height: calc(3rem + 1.2vw);
     font-size: calc(1.5rem + .7vw);
     border-radius: calc(1.5rem + .5vw);
 }
 
-.div-center form button {
-    background-color: #1e1f22;
+form button {
+    /*font-family: 'Homemade Apple', cursive;*/
+    font-family: 'Fredericka the Great', serif;
+    background-color: #fafafa00;
+    border: .2rem dashed #fafafa;
+    /*font-weight: bold;*/
     color: #fafafa;
 }
 
-.div-center form button:hover {
-    background-color: #008b8b;
-    color: #1e1f22;
+form button:hover {
+    background-color: #fafafa00;
+    border: .3rem dashed #008b8b;
+    font-weight: bold;
+    color: #008b8b;
 }
 
 .message {
@@ -100,10 +159,49 @@ font-family: 'Splash', cursive;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    font-size: calc(1rem + 1.1vw);
+    margin: 3.5rem auto;
+}
+
+.message a {
+    text-decoration: none;
+    font-family: 'Fredericka the Great', serif;
+    color: #fafafa;
+    font-style: italic;
+    font-size: calc(.9rem + 1vw);
+}
+
+.message a:hover {
+    text-decoration: none;
+    color: #008b8b;
+    font-weight: bold;
+    font-size: calc(1.1rem + 1.2vw);
 }
 
 .message > p {
     /*font-family: 'Splash', cursive;*/
-    font-size: calc(2.5rem + 1.2vw);
+    font-family: 'Fredericka the Great', serif;
+    font-size: calc(1rem + 1.1vw);
+}
+
+.tableScore {
+    font-family: 'Fredericka the Great', serif;
+    color: #fafafa;
+    border: .1rem solid #fafafa;
+    text-align: center;
+    width: 80%;
+}
+
+.scoreTitleCell {
+    font-weight: bold;
+    font-size: calc(1rem + 1vw);
+}
+
+.scoreCell {
+    padding: calc(.5rem + .3vw) calc(.3rem + .2vw);
+    font-size: calc(.8rem + .9vw);
+}
+
+.red {
+    color: #ff0000;
 }

@@ -5,23 +5,51 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../static/css/styles.css" type="text/css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=Permanent+Marker&family=Solitreo&family=Splash&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Homemade+Apple&display=swap" rel="stylesheet">
+        <!--<link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=Permanent+Marker&family=Solitreo&family=Splash&display=swap" rel="stylesheet">-->
         <title>Espace perso - Hangman</title>
     </head>
     <body>
         <div class="allContent">
-            <header class="banner">
-                <h1>Hangman Web</h1>
-            </header>
-            <div class="div-center">
-                <h2>Mon espace personnel</h2>
-                <div class="link-content">
-                    <a href="/hangman/init" class="play-button">Jouer</a>
+            <!--<div class="fixedContent">-->
+                <header class="banner">
+                    <a href="/user/modify"><span class="material-symbols-outlined">person</span></a>
+                    <h1>Hangman Web</h1>
+                    <a href="/session/logout"><span class="material-symbols-outlined">logout</span></a>
+                </header>
+                <div class="stats">
+                    <div class="name">
+                        <p>{{.Name}}</p>
+                    </div>
+                    <div class="nbGames">
+                        <p>{{.NbGames}} parties jouées</p>
+                    </div>
+                    <div class="maxScore">
+                        <p>Score max : {{.MaxScore}}</p>
+                    </div>
+                    <div class="averageScore">
+                        <p>Moyenne score : {{.AverageScore}}</p>
+                    </div>
+                    <div class="favoriteDictionary">
+                        <p>Dictionnaire préféré : {{.FavoriteDictionary}}</p>
+                    </div>
+                    <div class="allScores">
+                        <a href="/user/home/scores">Tous les scores</a>
+                    </div>
                 </div>
-                <form action="/user/logout" method="post"><button type="submit">Se déconnecter</button></form>
-                <!--<a href="/user/logout/">Se déconnecter</a>-->
+            <!--</div>-->
+            <div class="mainContent">
+                <h2>Mon espace personnel</h2>
+                <div class="div-center">
+                    <div class="link-content">
+                        <a href="/hangman/init" class="play-button">Jouer</a>
+                    </div>
+                </div>
             </div>
         </div>
     </body>

@@ -86,7 +86,7 @@ func login(username, password string) bool {
 	}
 	for _, user := range users {
 		if user.Name == username && user.Password == password {
-			mySession.user = user
+			mySession.MyUser = user
 			mySession.isOpen = true
 			return true
 		}
@@ -136,7 +136,7 @@ func (user *User) addUser() {
 }
 
 func (user *User) modifyUser(newUserData User) error {
-	if !checkUsername(user.Name) {
+	if checkUsername(user.Name) {
 		return &UserNotFoundError{}
 	}
 	users, err := retreiveUsers()
@@ -151,11 +151,23 @@ func (user *User) modifyUser(newUserData User) error {
 		}
 	}
 	users[userIndex] = newUserData
-	newData, err := json.Marshal(users)
-	if err != nil {
-		return err
+	var newData []byte
+	for i, user := range users {
+		data, err := json.Marshal(user)
+		fmt.Println(string(data))
+		data = append([]byte{'\n'}, data...)
+		data = append([]byte(firstContent()), data...)
+		data = []byte(Encrypt(string(data)))
+		if i < len(users)-1 {
+			data = append(data, ',', '\n')
+		}
+		fmt.Println()
+		fmt.Println(string(data))
+		newData = append(newData, data...)
+		if err != nil {
+			return err
+		}
 	}
-	newContent := []byte(Encrypt(string(newData)))
 	os.WriteFile(fileName, []byte(firstContent()), 0666)
 
 	file, err := os.OpenFile(fileName, os.O_WRONLY|os.O_APPEND, 0666)
@@ -163,20 +175,26 @@ func (user *User) modifyUser(newUserData User) error {
 		return err
 	}
 	defer file.Close()
-
-	newContent = append([]byte{'\n'}, newContent...)
-	_, err = file.Write(newContent)
+	_, err = file.Write([]byte{'\n'})
+	if err != nil {
+		log.Fatal(err)
+	}
+	_, err = file.Write(newData)
+	user.Name = newUserData.Name
+	user.Password = newUserData.Password
+	user.Dictionary = newUserData.Dictionary
+	user.Difficulty = newUserData.Difficulty
 	return err
 }
 
 func (session *Session) Close() {
 	session.isOpen = false
 	session.isPlaying = false
-	session.user.Name = ""
-	session.user.Password = ""
-	session.user.Dictionary = ""
-	session.user.Difficulty = ""
-	session.gameData.Game.Name = ""
+	session.MyUser.Name = ""
+	session.MyUser.Password = ""
+	session.MyUser.Dictionary = ""
+	session.MyUser.Difficulty = ""
+	session.MyGameData.Game.Name = ""
 
 	fmt.Println("session closed")
 	fmt.Printf("%#v\n", session)
