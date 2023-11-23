@@ -1,6 +1,6 @@
 package HangmanWeb
 
-import hangman "hangmancli/hangmancli"
+import "hangman/hangman"
 
 type Session struct {
 	isOpen     bool

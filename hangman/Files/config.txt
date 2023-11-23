@@ -1,0 +1,1 @@
+{"Name":"Thorgan","DictionaryPath":"../Files/Dictionaries/ods5.txt","Difficulty":10}

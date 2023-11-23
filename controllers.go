@@ -2,7 +2,7 @@ package HangmanWeb
 
 import (
 	"fmt"
-	hangman "hangmancli/hangmancli"
+	"hangman/hangman"
 	"log"
 	"net/http"
 	"sort"
