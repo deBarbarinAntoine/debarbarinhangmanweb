@@ -25,12 +25,12 @@ html {
     width: 100%;
     height: fit-content;
     font-family: 'Fredericka the Great', serif;
-    font-size: calc(2.2rem + 1.3vw);
+    font-size: calc(.8rem + 1.4vw);
     color: #fafafa;
 }
 
 .banner span {
-    font-size: calc(2.5rem + 1.5vw);
+    font-size: calc(1.2rem + 2.2vw);
     color: #fafafa;
 }
 
@@ -71,11 +71,10 @@ html {
 }
 
 .mainContent {
-    padding: calc(7rem + 4vw) 0 0 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: calc(100% - calc(7rem + 4vw));
+    height: 100%;
 }
 
 .mainContent h2 {
@@ -99,7 +98,6 @@ html {
 }
 
 .play-button {
-    /*font-family: 'Splash', cursive;*/
     font-family: 'Fredericka the Great', serif;
     font-size: calc(3.5rem + 2.2vw);
     color: #fafafa;
@@ -113,7 +111,7 @@ html {
 .sideContent {
     position: absolute;
     margin: calc(1.5rem + .8vw) 0 0 calc(1.2rem + 1vw);
-    padding: calc(.3rem + 1.6vw) calc(.5rem + 1.8vw);
+    padding: calc(.2rem + 1.6vw) calc(.4rem + 1.8vw);
     display: flex;
     flex-direction: column;
     gap: calc(.3rem + 1.6vw);
@@ -138,11 +136,10 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2.2rem;
-    margin: 3rem auto;
-    /*font-family: 'Splash', cursive;*/
+    gap: calc(1rem + 1vw);
+    margin: 1.2rem auto;
     font-family: 'Fredericka the Great', serif;
-    font-size: calc(1.8rem + 1.2vw);
+    font-size: calc(1rem + 1.5vw);
 }
 
 form input,select,button {
@@ -198,8 +195,8 @@ form button:hover {
 }
 
 .message img {
-    width: 25vw;
-    margin-bottom: calc(2rem + 1.2vw);
+    width: 22vw;
+    margin-bottom: calc(1rem + 1.6vw);
 }
 
 .tableScore {
@@ -238,4 +235,27 @@ form button:hover {
 
 .alert {
     color: #ff4500;
+}
+
+@media screen and (max-width: 600px){
+    .sideContent {
+        position: static;
+        margin: calc(1.5rem + .8vw) calc(1.2rem + 1vw);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: calc(1.2rem + .6vw);
+    }
+
+    .message {
+        margin: 0 auto;
+    }
+
+    .message img {
+        width: 45vw;
+    }
+
+    form {
+        margin: 1rem auto;
+    }
 }
