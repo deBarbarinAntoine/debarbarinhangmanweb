@@ -13,7 +13,7 @@ func routes() {
 	http.HandleFunc("/user/home/scores", scoresHandler)
 	http.HandleFunc("/user/modify", modifyUserHandler)
 	http.HandleFunc("/user/modify/update", updateUserHandler)
-	http.HandleFunc("/session/logout", logoutHandler)
+	http.HandleFunc("/user/logout", logoutHandler)
 	http.HandleFunc("/hangman/game", hangmanHandler)
 	http.HandleFunc("/hangman/game/reset", resetHandler)
 	http.HandleFunc("/hangman/init", initHandler)

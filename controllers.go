@@ -2,12 +2,11 @@ package HangmanWeb
 
 import (
 	"fmt"
+	hangman "hangmancli/hangmancli"
 	"log"
 	"net/http"
 	"sort"
 	"strings"
-
-	hangman "github.com/debarbarinantoine/hangmancli"
 )
 
 // var incorrectLogin bool
@@ -86,6 +85,7 @@ func openSessionHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("home handler")
 	if !redirect(INSESSION, w, r) {
 		return
 	}
@@ -146,6 +146,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	return
 }
 
 func scoresHandler(w http.ResponseWriter, r *http.Request) {

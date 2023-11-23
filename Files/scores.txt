@@ -32,4 +32,5 @@
 {"Name":"Antoine","Score":46,"Word":"immoral","Difficulty":"Intermédiaire","Dictionary":"anglais"},
 {"Name":"Thorgan","Score":20,"Word":"kawa","Difficulty":"Facile","Dictionary":"français"},
 {"Name":"Thorgan","Score":26,"Word":"bele","Difficulty":"Facile","Dictionary":"français"},
-{"Name":"Thorgan","Score":62,"Word":"parrainassiez","Difficulty":"Légendaire","Dictionary":"français"}
+{"Name":"Thorgan","Score":62,"Word":"parrainassiez","Difficulty":"Légendaire","Dictionary":"français"},
+{"Name":"Thorgan","Score":-5,"Word":"rama","Difficulty":"Facile","Dictionary":"français"}

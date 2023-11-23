@@ -9,9 +9,6 @@ import (
 	"strings"
 )
 
-// Admin info: {"Name":"Thorgan","Password":"Th0r9An","Dictionary":"../Files/Dictionaries/ods5.txt","Difficulty":"difficult"}
-// Other info: {"Name":"Antoine","Password":"Ant01n3","Dictionary":"../Files/Dictionaries/ods5.txt","Difficulty":"difficult"}
-
 var fileName = "../Files/accounts.thorg"
 
 type UserNotFoundError struct{}

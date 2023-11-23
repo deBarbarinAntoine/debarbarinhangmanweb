@@ -1,10 +1,2 @@
-github.com/debarbarinantoine/hangmancli v0.0.0-20231113203306-948a8a841d73 h1:Yowy3SzEo9+PWaHq+WLYXWvglOHNEgXRGAAhlIrG6zQ=
-github.com/debarbarinantoine/hangmancli v0.0.0-20231113203306-948a8a841d73/go.mod h1:OnIAxLLkTEg9uA1iil6OannRub6CBU+C/0iqmXZsI9A=
-github.com/debarbarinantoine/hangmancli v0.0.0-20231114073624-60a7cbec2af5 h1:CiSH7TArNzQ7w3eFVi+cf5/rDnAio7Vaheb/3Tq4dT4=
-github.com/debarbarinantoine/hangmancli v0.0.0-20231114073624-60a7cbec2af5/go.mod h1:OnIAxLLkTEg9uA1iil6OannRub6CBU+C/0iqmXZsI9A=
-github.com/debarbarinantoine/hangmancli v0.0.0-20231116080320-3f1b58ec32bc h1:t67NdBrr/OexNpMXdij12anqNBefOKxgnEjHOEVEG4I=
-github.com/debarbarinantoine/hangmancli v0.0.0-20231116080320-3f1b58ec32bc/go.mod h1:OnIAxLLkTEg9uA1iil6OannRub6CBU+C/0iqmXZsI9A=
-github.com/debarbarinantoine/hangmancli v0.0.0-20231116111157-13bb5a2c9421 h1:ZTny5tjT9qkEKIz6A7zzTE17Ik7Q2oQAczSVuL00TSU=
-github.com/debarbarinantoine/hangmancli v0.0.0-20231116111157-13bb5a2c9421/go.mod h1:OnIAxLLkTEg9uA1iil6OannRub6CBU+C/0iqmXZsI9A=
-github.com/debarbarinantoine/hangmancli v0.0.0-20231121180407-7ba7a928a281 h1:Jho6nrvfKtChFIG3jKobWfUaWm6hrvWaAW/OwCljwPY=
-github.com/debarbarinantoine/hangmancli v0.0.0-20231121180407-7ba7a928a281/go.mod h1:OnIAxLLkTEg9uA1iil6OannRub6CBU+C/0iqmXZsI9A=
+github.com/debarbarinantoine/hangmancli v0.0.0-20231122221436-4f905f4131a5 h1:xHkT0MfLyB9Yw2fiUK3b3F+mXtV3EflEqKdF60N12h4=
+github.com/debarbarinantoine/hangmancli v0.0.0-20231122221436-4f905f4131a5/go.mod h1:OnIAxLLkTEg9uA1iil6OannRub6CBU+C/0iqmXZsI9A=
