@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Homemade+Apple&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../static/favicon.png">
     <title>Hangman - Jeu</title>
 </head>
 <body>
@@ -16,16 +17,19 @@
     <header class="banner">
         <a href="/hangman/game/reset"><span class="material-symbols-outlined">arrow_back</span></a>
         <h1>Hangman Web</h1>
-        <a href="/session/logout"><span class="material-symbols-outlined">logout</span></a>
+        <a href="/user/session/exit"><span class="material-symbols-outlined">logout</span></a>
     </header>
+    <div class="sideContent">
+        <p>Nom : {{.MyGameData.Game.Name}}</p>
+        <p>Difficulté : {{.MyUser.Difficulty}}</p>
+        <p>Dictionnaire : {{.MyGameData.Game.Dictionary}}</p>
+        <p>Score : {{.MyGameData.Game.Score}}</p>
+        <p>Nombre d'erreurs : {{.MyGameData.Game.NbError}}</p>
+    </div>
     <div class="mainContent">
         <div class="div-center">
             <div class="message">
-                <p>Nom : {{.MyGameData.Game.Name}}</p>
-                <p>Difficulté : {{.MyUser.Difficulty}}</p>
-                <p>Dictionnaire : {{.MyGameData.Game.Dictionary}}</p>
-                <p>Score : {{.MyGameData.Game.Score}}</p>
-                <p>Nombre d'erreurs : {{.MyGameData.Game.NbError}}</p>
+                <img src="../static/hangman{{.MyGameData.Game.NbError}}.png" alt="dessin de pendu nº{{.MyGameData.Game.NbError}}" />
                 <p>{{.MyGameData.WordDisplay}}</p>
                 <p class="{{.MyGameData.MessageClass}}">{{.MyGameData.Message}}</p>
                 <p>Lettres déjà jouées : {{.MyGameData.RunesPlayed}}</p>
@@ -36,7 +40,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </img>
 </div>
 </body>
 </html>

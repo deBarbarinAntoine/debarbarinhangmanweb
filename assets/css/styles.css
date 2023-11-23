@@ -121,6 +121,19 @@ font-family: 'Homemade Apple', cursive;
     font-size: calc(4rem + 2.5vw);
 }
 
+.sideContent {
+    position: absolute;
+    margin: calc(1.5rem + .8vw) 0 0 calc(1.2rem + 1vw);
+    padding: calc(.3rem + 1.6vw) calc(.5rem + 1.8vw);
+    display: flex;
+    flex-direction: column;
+    gap: calc(.3rem + 1.6vw);
+    justify-content: space-evenly;
+    border: .5rem solid #fafafa;
+    font-size: calc(.3rem + 1.6vw);
+    font-family: 'Fredericka the Great', serif;
+}
+
 .div-center {
     display: flex;
     justify-content: center;
@@ -174,6 +187,7 @@ form button:hover {
     align-items: center;
     font-size: calc(1rem + 1.1vw);
     margin: 3.5rem auto;
+    gap: calc(.8rem + .4vw);
 }
 
 .message a {
@@ -195,6 +209,11 @@ form button:hover {
     /*font-family: 'Splash', cursive;*/
     font-family: 'Fredericka the Great', serif;
     font-size: calc(1rem + 1.1vw);
+}
+
+.message img {
+    width: 17vw;
+    margin-bottom: calc(2rem + 1.2vw);
 }
 
 .tableScore {

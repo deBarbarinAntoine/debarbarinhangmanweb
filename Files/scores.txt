@@ -33,4 +33,7 @@
 {"Name":"Thorgan","Score":20,"Word":"kawa","Difficulty":"Facile","Dictionary":"français"},
 {"Name":"Thorgan","Score":26,"Word":"bele","Difficulty":"Facile","Dictionary":"français"},
 {"Name":"Thorgan","Score":62,"Word":"parrainassiez","Difficulty":"Légendaire","Dictionary":"français"},
-{"Name":"Thorgan","Score":-5,"Word":"rama","Difficulty":"Facile","Dictionary":"français"}
+{"Name":"Thorgan","Score":-5,"Word":"rama","Difficulty":"Facile","Dictionary":"français"},
+{"Name":"Thorgan","Score":21,"Word":"psi","Difficulty":"Facile","Dictionary":"français"},
+{"Name":"Thorgan","Score":62,"Word":"souviennent","Difficulty":"Légendaire","Dictionary":"français"},
+{"Name":"Thorgan","Score":25,"Word":"verdisses","Difficulty":"Difficile","Dictionary":"français"}

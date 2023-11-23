@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Homemade+Apple&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../static/favicon.png">
     <title>Hangman - Fin</title>
 </head>
 <body>
@@ -17,6 +18,7 @@
     </header>
     <div class="div-center">
         <div class="message">
+            <img src="../static/{{.ImgSrc}}" alt="{{.ImgAlt}}">
             <h2 class="{{.MessageClass}}">{{.Message}}</h2>
             <p>Le mot était : {{.Data.Word}}</p>
             <a href="/hangman/init">Recommencer</a>
