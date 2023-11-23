@@ -18,10 +18,13 @@ const (
 	OUT       = 32
 )
 
+// Root handler redirects to index handler.
 func rootHandler(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/index", http.StatusMovedPermanently)
+	return
 }
 
+// Index page handler.
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	if !redirect(OUT, w, r) {
 		return
@@ -32,6 +35,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// Creating user page handler.
 func createUserHandler(w http.ResponseWriter, r *http.Request) {
 	if !redirect(OUT, w, r) {
 		return
@@ -42,6 +46,7 @@ func createUserHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// Backend treatment handler for the creating user form.
 func creatingUserHandler(w http.ResponseWriter, r *http.Request) {
 	if !redirect(OUT, w, r) {
 		return
@@ -58,6 +63,7 @@ func creatingUserHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// Login page handler.
 func loginHandler(w http.ResponseWriter, r *http.Request) {
 	if !redirect(OUT, w, r) {
 		return
@@ -68,6 +74,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// Backend treatment handler for the login form.
 func openSessionHandler(w http.ResponseWriter, r *http.Request) {
 	if !redirect(OUT, w, r) {
 		return
@@ -83,6 +90,7 @@ func openSessionHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// Home page handler.
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("home handler")
 	if !redirect(INSESSION, w, r) {
@@ -145,9 +153,9 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	return
 }
 
+// Top scores page handler.
 func scoresHandler(w http.ResponseWriter, r *http.Request) {
 	if !redirect(INSESSION, w, r) {
 		return
@@ -166,6 +174,7 @@ func scoresHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// Modify user page handler.
 func modifyUserHandler(w http.ResponseWriter, r *http.Request) {
 	if !redirect(INSESSION, w, r) {
 		return
@@ -177,6 +186,7 @@ func modifyUserHandler(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
+// Backend treatment handler for the modify user form.
 func updateUserHandler(w http.ResponseWriter, r *http.Request) {
 	if !redirect(INSESSION, w, r) {
 		return
@@ -212,15 +222,19 @@ func updateUserHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// Backend handler to clear current session and redirect to index page.
 func logoutHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Cache-Control", "no-cache, no-store, must-revalidate")
+	w.Header().Set("Pragma", "no-cache")
+	w.Header().Set("Expires", "0")
 	fmt.Println("logout")
 	mySession.Close()
 	fmt.Println("From handler:")
 	fmt.Printf("%#v\n", mySession)
 	http.Redirect(w, r, "/index", http.StatusMovedPermanently)
-	return
 }
 
+// Init game page handler.
 func initHandler(w http.ResponseWriter, r *http.Request) {
 	if !redirect(INSESSION, w, r) {
 		return
@@ -229,9 +243,9 @@ func initHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	return
 }
 
+// Backend treatment handler for the init game form.
 func treatmentHandler(w http.ResponseWriter, r *http.Request) {
 	if !redirect(INSESSION, w, r) {
 		return
@@ -270,6 +284,7 @@ func treatmentHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// Hangman page handler.
 func hangmanHandler(w http.ResponseWriter, r *http.Request) {
 	if !redirect(INGAME, w, r) {
 		return
@@ -307,9 +322,9 @@ func hangmanHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	return
 }
 
+// Backend treatment handler for the hangman page form.
 func checkInputHandler(w http.ResponseWriter, r *http.Request) {
 	if !redirect(INGAME, w, r) {
 		return
@@ -348,6 +363,7 @@ func checkInputHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// Endgame page handler.
 func endgameHandler(w http.ResponseWriter, r *http.Request) {
 	if !redirect(INGAME, w, r) {
 		return
@@ -392,6 +408,7 @@ func endgameHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// Reset game handler.
 func resetHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("resetHandler")
 	fmt.Println("isPlaying: ", mySession.isPlaying)
@@ -406,21 +423,25 @@ func resetHandler(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
+// Redirection to home page.
 func redirectSession(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/user/home", http.StatusSeeOther)
 	return
 }
 
+// Redirection to hangman page.
 func redirectGame(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/hangman/game", http.StatusSeeOther)
 	return
 }
 
+// Redirection to index page.
 func redirectIndex(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/index", http.StatusSeeOther)
 	return
 }
 
+// Redirection function: status should be INGAME, INSESSION or OUT and checks if the current user can access to the route called. Otherwise, it will redirect to the status' corresponding available routes.
 func redirect(status int, w http.ResponseWriter, r *http.Request) bool {
 	var isSessionRoute, isGameRoute bool
 	switch status {

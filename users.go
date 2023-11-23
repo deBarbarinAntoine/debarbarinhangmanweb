@@ -13,10 +13,12 @@ var fileName = "../Files/accounts.thorg"
 
 type UserNotFoundError struct{}
 
+// Custom error for the retrieveUsers function.
 func (m *UserNotFoundError) Error() string {
 	return "user not found in " + fileName
 }
 
+// iterativeDecrypt decrypts the data in accounts.thorg one line at a time.
 func iterativeDecrypt(slice []string) []string {
 	var result []string
 	for {
@@ -31,7 +33,8 @@ func iterativeDecrypt(slice []string) []string {
 	return result
 }
 
-func retreiveUsers() ([]User, error) {
+// retrieveUsers fetches the user data in the accounts file and returns it in a slice.
+func retrieveUsers() ([]User, error) {
 	data, err := os.ReadFile(fileName)
 	if err != nil {
 		return nil, err
@@ -57,8 +60,9 @@ func retreiveUsers() ([]User, error) {
 	return users, nil
 }
 
+// checkUsername checks if the username is already used in the registered users.
 func checkUsername(username string) bool {
-	users, err := retreiveUsers()
+	users, err := retrieveUsers()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -75,9 +79,10 @@ func checkUsername(username string) bool {
 	return true
 }
 
+// login checks if the username and password matches a registered user and initialises the session with those values.
 func login(username, password string) bool {
 	fmt.Println("login function called")
-	users, err := retreiveUsers()
+	users, err := retrieveUsers()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -91,6 +96,7 @@ func login(username, password string) bool {
 	return false
 }
 
+// addUser creates a new user and writes its informations in the accounts file.
 func (user *User) addUser() {
 
 	newEntry, err := json.Marshal(user)
@@ -132,11 +138,12 @@ func (user *User) addUser() {
 
 }
 
+// modifyUser fetches the users data from the file, modifies the current user data and rewrites all data in the accounts file.
 func (user *User) modifyUser(newUserData User) error {
 	if checkUsername(user.Name) {
 		return &UserNotFoundError{}
 	}
-	users, err := retreiveUsers()
+	users, err := retrieveUsers()
 	if err != nil {
 		return err
 	}
@@ -184,6 +191,7 @@ func (user *User) modifyUser(newUserData User) error {
 	return err
 }
 
+// Close is the Session method that resets all session values.
 func (session *Session) Close() {
 	session.isOpen = false
 	session.isPlaying = false
@@ -192,11 +200,12 @@ func (session *Session) Close() {
 	session.MyUser.Dictionary = ""
 	session.MyUser.Difficulty = ""
 	session.MyGameData.Game.Name = ""
-
+	session.MyGameData.Game.ClearGameData()
 	fmt.Println("session closed")
 	fmt.Printf("%#v\n", session)
 }
 
+// First line in the accounts file (used to encypt data).
 func firstContent() string {
 	return hex.EncodeToString([]byte{0xb5, 0xd4, 0xe6, 0x8a, 0xa5, 0x3d, 0x54, 0x53, 0xc8, 0xd5, 0x77, 0x66, 0x31, 0xf5, 0x5, 0xf0, 0x99, 0xce, 0x5a, 0xc6, 0x10, 0x5e, 0xd8, 0xc6, 0xaf, 0x4a, 0xd5, 0xad, 0xc4, 0x47, 0x4e, 0xf8})
 }

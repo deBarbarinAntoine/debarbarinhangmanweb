@@ -11,11 +11,13 @@ import (
 
 var tmpl *template.Template
 
+// Establishing the fileserver to make assets directory available for the client.
 func fileServer() {
 	fs := http.FileServer(http.Dir("../assets"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 }
 
+// runServer runs the server in a goroutine and open the browser at the correct URL and then loops waiting for the "stop" input to end all goroutines.
 func runServer() {
 	port := "localhost:8080"
 	url := "http://" + port + "/index"
@@ -24,7 +26,7 @@ func runServer() {
 	time.Sleep(time.Second * 5)
 	cmd := exec.Command("explorer", url)
 	cmd.Run()
-	fmt.Println("If the navigator didn't open on its own, just go to ", url, " on your navigator.")
+	fmt.Println("If the navigator didn't open on its own, just go to ", url, " on your browser.")
 	isRunning := true
 	for isRunning {
 		fmt.Print("If you want to end the server, type 'stop' here :")
@@ -36,6 +38,7 @@ func runServer() {
 	}
 }
 
+// Run is the public function that executes all necessary functions to run the server and website.
 func Run() {
 	var err error
 	tmpl, err = template.ParseGlob("../templates/*.html")

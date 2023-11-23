@@ -10,6 +10,7 @@ import (
 	"io"
 )
 
+// Encrypt encrypts the data using the first line as an encryption key.
 func Encrypt(data string) string {
 
 	var quid, info string
@@ -31,14 +32,11 @@ func Encrypt(data string) string {
 
 	byteInfo := []byte(info)
 
-	//Create a new Cipher Block from the key
 	cipherBlock, err := aes.NewCipher(aliquid)
 	if err != nil {
 		panic(err.Error())
 	}
 
-	/* The IV needs to be unique, but not secure. Therefore it's common to
-	   include it at the beginning of the ciphertext.  */
 	cipherInfo := make([]byte, aes.BlockSize+len(byteInfo))
 	iv := cipherInfo[:aes.BlockSize]
 	if _, err := io.ReadFull(rand.Reader, iv); err != nil {
@@ -48,11 +46,10 @@ func Encrypt(data string) string {
 	stream := cipher.NewCFBEncrypter(cipherBlock, iv)
 	stream.XORKeyStream(cipherInfo[aes.BlockSize:], byteInfo)
 
-	// convert to base64
 	return base64.URLEncoding.EncodeToString(cipherInfo)
 }
 
-// decrypt from base64 to decrypted string
+// Decrypt decrypts the data using the first line as a decryption key.
 func Decrypt(data string) string {
 
 	var quid, info string
@@ -79,8 +76,6 @@ func Decrypt(data string) string {
 		panic(err)
 	}
 
-	/* The IV needs to be unique, but not secure. Therefore it's common to
-	   include it at the beginning of the ciphertext.  */
 	if len(cipherInfo) < aes.BlockSize {
 		panic("cipherInfo too short")
 	}
@@ -89,7 +84,6 @@ func Decrypt(data string) string {
 
 	stream := cipher.NewCFBDecrypter(cipherBlock, iv)
 
-	// XORKeyStream can work in-place if the two arguments are the same.
 	stream.XORKeyStream(cipherInfo, cipherInfo)
 	fmt.Println(string(cipherInfo))
 	return string(cipherInfo)

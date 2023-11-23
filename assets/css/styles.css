@@ -8,16 +8,6 @@ html {
     font-size: 62.5%;
 }
 
-/*
-font-family: 'Pangolin', cursive;
-font-family: 'Permanent Marker', cursive;
-font-family: 'Solitreo', cursive;
-font-family: 'Splash', cursive;
-
-font-family: 'Fredericka the Great', serif;
-font-family: 'Homemade Apple', cursive;
-*/
-
 .allContent {
     color: #fafafa;
     width: 100%;
@@ -35,7 +25,6 @@ font-family: 'Homemade Apple', cursive;
     width: 100%;
     height: fit-content;
     font-family: 'Fredericka the Great', serif;
-    /*font-family: 'Homemade Apple', cursive;*/
     font-size: calc(2.2rem + 1.3vw);
     color: #fafafa;
 }
@@ -165,11 +154,9 @@ form input,select,button {
 }
 
 form button {
-    /*font-family: 'Homemade Apple', cursive;*/
     font-family: 'Fredericka the Great', serif;
     background-color: #fafafa00;
     border: .2rem dashed #fafafa;
-    /*font-weight: bold;*/
     color: #fafafa;
 }
 
@@ -206,13 +193,12 @@ form button:hover {
 }
 
 .message > p {
-    /*font-family: 'Splash', cursive;*/
     font-family: 'Fredericka the Great', serif;
     font-size: calc(1rem + 1.1vw);
 }
 
 .message img {
-    width: 17vw;
+    width: 25vw;
     margin-bottom: calc(2rem + 1.2vw);
 }
 

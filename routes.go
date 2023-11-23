@@ -2,6 +2,7 @@ package HangmanWeb
 
 import "net/http"
 
+// routes initialises all the routes.
 func routes() {
 	http.HandleFunc("/", rootHandler)
 	http.HandleFunc("/index", indexHandler)
@@ -13,7 +14,7 @@ func routes() {
 	http.HandleFunc("/user/home/scores", scoresHandler)
 	http.HandleFunc("/user/modify", modifyUserHandler)
 	http.HandleFunc("/user/modify/update", updateUserHandler)
-	http.HandleFunc("/user/session/exit", logoutHandler)
+	http.HandleFunc("/user/session/logout", logoutHandler)
 	http.HandleFunc("/hangman/game", hangmanHandler)
 	http.HandleFunc("/hangman/game/reset", resetHandler)
 	http.HandleFunc("/hangman/init", initHandler)
