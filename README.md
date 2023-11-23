@@ -16,7 +16,7 @@ go run ./main.go
 ```
 
 Then, it should display that:
-``` powershell
+```
 Server is running...
 If the navigator didn't open on its own, just go to http://localhost:8080/index on your browser.
 If you want to end the server, type 'stop' here :
