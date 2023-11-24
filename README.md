@@ -11,7 +11,7 @@ To run it on your pc, you need to download the **repository** as a **.zip** file
 Unzip it and then go to ```debarbarinantoinehangmanweb/exec``` and right click in it. Then, click on **Open in the terminal**.
 
 In the terminal, write that line and press ```Enter```:
-``` powershell
+```
 go run ./main.go
 ```
 
@@ -43,4 +43,4 @@ Doing that, we wanted to challenge ourselves to learn more and to emulate each o
 
 The other projects are here:
 - [Hangman GoWeb de Nicolas](https://github.com/Nicolas13100/Hangman_Web_Duo.git)
-- [Hangman GoWeb de Sabrina]()
+- [Hangman GoWeb de Sabrina](https://github.com/Esabrina77/Projet_Hangman_Web.git)

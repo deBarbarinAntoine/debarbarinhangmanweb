@@ -38,4 +38,5 @@
 {"Name":"Thorgan","Score":62,"Word":"souviennent","Difficulty":"Légendaire","Dictionary":"français"},
 {"Name":"Thorgan","Score":25,"Word":"verdisses","Difficulty":"Difficile","Dictionary":"français"},
 {"Name":"Thorgan","Score":83,"Word":"impraticabilite","Difficulty":"Légendaire","Dictionary":"français"},
-{"Name":"Nico","Score":16,"Word":"nickle","Difficulty":"Intermédiaire","Dictionary":"anglais"}
+{"Name":"Nico","Score":16,"Word":"nickle","Difficulty":"Intermédiaire","Dictionary":"anglais"},
+{"Name":"Thorgan","Score":36,"Word":"chromite","Difficulty":"Difficile","Dictionary":"français"}
