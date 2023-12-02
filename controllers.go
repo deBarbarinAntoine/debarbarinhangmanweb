@@ -98,7 +98,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	var nbGames, maxScore, totalScore int
 	dictionaryUse := make(map[string]int)
-	allGames := hangman.RetrieveSavedGames("../Files/scores.txt")
+	allGames := hangman.RetrieveSavedGames(path + "Files/scores.txt")
 	for _, game := range allGames {
 		if game.Name == mySession.MyUser.Name {
 			nbGames++
@@ -160,7 +160,7 @@ func scoresHandler(w http.ResponseWriter, r *http.Request) {
 	if !redirect(INSESSION, w, r) {
 		return
 	}
-	savedGames := hangman.RetrieveSavedGames("../Files/scores.txt")
+	savedGames := hangman.RetrieveSavedGames(path + "Files/scores.txt")
 	sort.SliceStable(savedGames, func(i, j int) bool { return savedGames[i].Score > savedGames[j].Score })
 	if savedGames != nil {
 		err := tmpl.ExecuteTemplate(w, "scores", savedGames)
@@ -269,7 +269,7 @@ func treatmentHandler(w http.ResponseWriter, r *http.Request) {
 		mySession.isPlaying = true
 		mySession.MyGameData.Game.Name = mySession.MyUser.Name
 		mySession.MyGameData.Game.Difficulty = difficulty
-		mySession.MyGameData.Game.Dictionary = "../Files/Dictionaries/" + r.FormValue("dictionary") + ".txt"
+		mySession.MyGameData.Game.Dictionary = path + "Files/Dictionaries/" + r.FormValue("dictionary") + ".txt"
 		mySession.MyUser.Dictionary = r.FormValue("dictionary")
 		mySession.MyUser.modifyUser(mySession.MyUser)
 		mySession.MyGameData.Game.InitGame()
@@ -371,7 +371,7 @@ func endgameHandler(w http.ResponseWriter, r *http.Request) {
 	if mySession.MyGameData.status == hangman.WIN || mySession.MyGameData.status == hangman.LOOSE {
 		var imgSrc, imgAlt, message, messageClass string
 		if mySession.MyGameData.status == hangman.WIN {
-			mySession.MyGameData.Game.SaveGame("../Files/scores.txt", true)
+			mySession.MyGameData.Game.SaveGame(path+"Files/scores.txt", true)
 			imgSrc = "win.png"
 			imgAlt = "vous avez gagné"
 			message = "Félicitations " + mySession.MyGameData.Game.Name + ", vous avez gagné !"

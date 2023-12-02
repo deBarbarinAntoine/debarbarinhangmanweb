@@ -5,15 +5,19 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"os"
 	"os/exec"
+	"path/filepath"
 	"time"
 )
 
 var tmpl *template.Template
+var wd, _ = os.Getwd()
+var path = filepath.Dir(wd) + "/"
 
 // Establishing the fileserver to make assets directory available for the client.
 func fileServer() {
-	fs := http.FileServer(http.Dir("../assets"))
+	fs := http.FileServer(http.Dir(path + "assets"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 }
 
@@ -41,7 +45,7 @@ func runServer() {
 // Run is the public function that executes all necessary functions to run the server and website.
 func Run() {
 	var err error
-	tmpl, err = template.ParseGlob("../templates/*.html")
+	tmpl, err = template.ParseGlob(path + "templates/*.html")
 	if err != nil {
 		log.Fatal(err)
 	}
