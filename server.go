@@ -5,15 +5,18 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-	"os"
 	"os/exec"
 	"path/filepath"
+	"runtime"
 	"time"
 )
 
 var tmpl *template.Template
-var wd, _ = os.Getwd()
-var path = filepath.Dir(wd) + "/"
+
+var (
+	_, b, _, _ = runtime.Caller(0)
+	path       = filepath.Dir(b) + "/"
+)
 
 // Establishing the fileserver to make assets directory available for the client.
 func fileServer() {

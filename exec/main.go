@@ -1,6 +1,8 @@
 package main
 
-import web "HangmanWeb"
+import (
+	web "HangmanWeb"
+)
 
 func main() {
 	web.Run()
